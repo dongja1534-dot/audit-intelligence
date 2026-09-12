@@ -575,11 +575,6 @@ OpenDART 기반 상장사 감사정보 검색·분석 도구
 FY2025
 </option>
 
-<option value="2024"
-{"selected" if year == "2024" else ""}>
-FY2024
-</option>
-
 </select>
 
 
