@@ -80,8 +80,8 @@ def home():
     params = [year]
 
     if auditor_filter:
-        where_sql += " AND auditor = ?"
-        params.append(auditor_filter)
+    where_sql += " AND auditor_normalized = ?"
+    params.append(auditor_filter)
 
     if opinion_filter:
         where_sql += " AND opinion = ?"
@@ -189,14 +189,15 @@ def home():
     # -------------------------
 
     cur.execute("""
-        SELECT DISTINCT auditor
-        FROM audit_data
-        WHERE bsns_year = ?
-          AND auditor IS NOT NULL
-          AND auditor != ''
-          AND auditor != '-'
-        ORDER BY auditor
-    """, (year,))
+    SELECT DISTINCT auditor_normalized
+    FROM audit_data
+    WHERE bsns_year = ?
+      AND auditor_normalized IS NOT NULL
+      AND auditor_normalized != ''
+      AND auditor_normalized != '-'
+      AND auditor_normalized != '해당사항없음'
+    ORDER BY auditor_normalized
+""", (year,))
 
     auditors = cur.fetchall()
 
@@ -225,7 +226,7 @@ def home():
 
     for row in auditors:
 
-        auditor_name = row["auditor"]
+        auditor_name = row["auditor_normalized"]
 
         selected = (
             "selected"
