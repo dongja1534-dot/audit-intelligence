@@ -80,8 +80,8 @@ def home():
     params = [year]
 
     if auditor_filter:
-    where_sql += " AND auditor_normalized = ?"
-    params.append(auditor_filter)
+        where_sql += " AND auditor_normalized = ?"
+        params.append(auditor_filter)
 
     if opinion_filter:
         where_sql += " AND opinion = ?"
